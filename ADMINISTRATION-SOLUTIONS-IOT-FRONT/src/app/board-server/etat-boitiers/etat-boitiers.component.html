@@ -1,0 +1,198 @@
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-10">
+            <h1>Etat des boitiers</h1>
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-dark btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" (click)="initiateModelDialog()"><i class="fa fa-plus"></i>Ajouter Boitier</button>    
+        </div>
+    </div>
+   
+</div>
+<div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+            <th scope="col">ID boitier</th>
+            <th scope="col">Matricule</th>
+            <th scope="col">Etat</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
+            <th scope="col">Validité</th>
+            <th scope="col">Vitesse</th>
+            <th scope="col">GPS</th>
+            <th scope="col">GSM</th>
+            <th scope="col">Date GPS</th>
+            <th scope="col">Date serveur</th>
+            <th scope="col">Id trajet</th>
+            <th scope="col">Date option</th>
+            <th scope="col">HLR</th>
+            <th scope="col">IMEI</th>
+            <th scope="col">Version</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let boitier of listBoitiers">
+                <th scope="row">{{boitier.idBoitier}}</th>
+                <td>{{boitier.matricule}}</td>
+                <td>{{boitier.etat}}</td>
+                <td>{{boitier.latitude}}</td>
+                <td>{{boitier.longitude}}</td>
+                <td>{{boitier.validite}}</td>
+                <td>{{boitier.vitesse}}</td>
+                <td>{{boitier.gps}}</td>
+                <td>{{boitier.gsm}}</td>
+                <td>{{boitier.dateGps}}</td>
+                <td>{{boitier.dateServeur}}</td>
+                <td>{{boitier.idTrajet}}</td>
+                <td>{{boitier.dateOption}}</td>
+                <td>{{boitier.hlr}}</td>
+                <td>{{boitier.imei}}</td>
+                <td>{{boitier.version}}</td>
+              </tr>
+        </tbody>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="totalElements" (page)="nextPage($event)"> </mat-paginator>
+</div>
+<!-- model dialog for add and update-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #model>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">Ajouter une boitier</h4>  
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="boitierForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" formControlName="label" placeholder="Label" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" formControlName="etatBoitier" placeholder="Etat de Boitier" class="form-control" />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input type="number" formControlName="streamId" placeholder="Identifiant de flux" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="number" formControlName="rawstream_id" placeholder="ID de flux de ligne" class="form-control" />
+                </div>
+              </div>
+              <div class="col">
+                  <div class="form-outline">
+                    <input type="text" formControlName="matricule" placeholder="Matricule" class="form-control" />
+                  </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" formControlName="etat" placeholder="Etat" class="form-control" />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" formControlName="latitude" placeholder="Latitude" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" formControlName="longitude" placeholder="Longitude" class="form-control" />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" formControlName="validite" placeholder="Validite" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" formControlName="vitesse" placeholder="Vitesse" class="form-control" />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                    <input type="text" formControlName="ignition" placeholder="Ignition" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" formControlName="gps" placeholder="Gps" class="form-control" />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" formControlName="gsm" placeholder="Gsm" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="date" formControlName="dateGps" placeholder="Date de Gps" class="form-control" />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input type="date" formControlName="dateServeur" placeholder="Date de serveur" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-outline">
+                      <input type="number" formControlName="idTrajet" placeholder="Identifiant de trajet" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-outline">
+                      <input type="date" formControlName="dateOption" placeholder="Date d'option" class="form-control" />
+                    </div>
+                  </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-outline">
+                      <input type="text" formControlName="hlr" placeholder="Hlr" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-outline">
+                      <input type="text" formControlName="imei" placeholder="Imei" class="form-control" />
+                    </div>
+                  </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-outline">
+                      <input type="text" formControlName="version" placeholder="Version" class="form-control" />
+                    </div>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="changeisUpdate()">Fermer</button>
+          <button type="button" class="btn btn-success" (click)="onSubmit()">ajouter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- model dialog for details-->

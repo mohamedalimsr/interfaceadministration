@@ -1,0 +1,53 @@
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-10">
+            <h1>Etat des boitiers</h1>
+        </div>
+    </div>
+</div>
+<div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+            <th scope="col">ID boitier</th>
+            <th scope="col">Matricule</th>
+            <th scope="col">Etat</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
+            <th scope="col">Validité</th>
+            <th scope="col">Vitesse</th>
+            <th scope="col">GPS</th>
+            <th scope="col">GSM</th>
+            <th scope="col">Date GPS</th>
+            <th scope="col">Date serveur</th>
+            <th scope="col">Id trajet</th>
+            <th scope="col">Date option</th>
+            <th scope="col">HLR</th>
+            <th scope="col">IMEI</th>
+            <th scope="col">Version</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let boitier of listBoitiers">
+                <th scope="row">{{boitier.idBoitier}}</th>
+                <td>{{boitier.matricule}}</td>
+                <td>{{boitier.etat}}</td>
+                <td>{{boitier.latitude}}</td>
+                <td>{{boitier.longitude}}</td>
+                <td>{{boitier.validite}}</td>
+                <td>{{boitier.vitesse}}</td>
+                <td>{{boitier.gps}}</td>
+                <td>{{boitier.gsm}}</td>
+                <td>{{boitier.dateGps}}</td>
+                <td>{{boitier.dateServeur}}</td>
+                <td>{{boitier.idTrajet}}</td>
+                <td>{{boitier.dateOption}}</td>
+                <td>{{boitier.hlr}}</td>
+                <td>{{boitier.imei}}</td>
+                <td>{{boitier.version}}</td>
+              </tr>
+        </tbody>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="totalElements" (page)="nextPage($event)"> </mat-paginator>
+</div>

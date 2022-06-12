@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="my-5 row">
+    <div class="col-sm-8">
+      <button type="button" class="btn btn-dark btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="fa fa-plus"></i>Ajouter un compte serveur</button>
+    </div>
+  </div>
+  <div class="card my-5">
+      <h1 style="margin: auto;">Liste des comptes serveur</h1>
+      <div class="card-body">
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Rôle</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sca of serverClientAccounts">
+              <td>{{ sca.idServerClientAccount }}</td>
+              <td>{{ sca.username }}</td>
+              <td><a href="mailto:{{ sca.mailSupport }}">{{ sca.email }}</a></td>
+              <td>{{ sca.role.name }}</td>
+              <td>
+                <button type="button" class="btn btn-outline-info" (click)="detailsServerClientAccount(sca.idServerClientAccount)" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Détails</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-outline-secondary" (click)="updateServerAccountForm(sca.idServerClientAccount)" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editer</button>
+              </td>
+              <td><button type="button" class="btn btn-outline-danger" (click)="deleteServerClientAccount(sca.idServerClientAccount)">Supprimer</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator [pageSize]="5" [length]="totalElements" (page)="nextPage($event)"> </mat-paginator>
+      </div>
+    </div>
+</div>
+<!-- model dialog for add and update-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #model>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 *ngIf="isAddMode && !isDetailMode" class="modal-title" id="exampleModalLabel" style="text-align: center">Ajouter un compte serveur</h4>  
+          <h4 *ngIf="!isAddMode && !isDetailMode" class="modal-title" id="exampleModalLabel" style="text-align: center">Mise à jour compte serveur</h4>  
+          <h4 *ngIf="isDetailMode" class="modal-title" id="exampleModalLabel" style="text-align: center">Détails compte serveur</h4>  
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="serverAccountForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-4" *ngIf="!isAddMode">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" formControlName="idServerClientAccount" placeholder="ID" class="form-control" readonly/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input [readonly]="isDetailMode" type="text" formControlName="username" placeholder="Nom & prénom" class="form-control" required/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input [readonly]="isDetailMode" type="email" formControlName="email" placeholder="Email" class="form-control" required/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input [readonly]="isDetailMode" type="text" formControlName="password" placeholder="Mot de passe" class="form-control" required/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input [readonly]="isDetailMode" type="text" formControlName="pseudo" placeholder="Pseudo" class="form-control" required/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input [readonly]="isDetailMode" type="text" formControlName="ipAdresse" placeholder="Adresse IP" class="form-control" required/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input [readonly]="isDetailMode" type="number" formControlName="intervaleStart" placeholder="Début de l'intervalle" class="form-control" required/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input [readonly]="isDetailMode" type="number" formControlName="intervaleEnd" placeholder="Fin de l'intervalle" class="form-control" required/>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input [readonly]="isDetailMode" type="date" formControlName="dateCreation" placeholder="Date de création" class="form-control" required/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input [readonly]="isDetailMode" type="date" formControlName="dateExpiration" placeholder="Date d'expiration" class="form-control" required/>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="changeisUpdate()">Fermer</button>
+          <button type="button" *ngIf="!isAddMode && !isDetailMode" class="btn btn-success" [hidden]="isupdated" (click)="onSubmit()">mettre à jour</button>
+          <button type="button" *ngIf="isAddMode && !isDetailMode" class="btn btn-success" [hidden]="isupdated" (click)="onSubmit()">ajouter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- model dialog for details-->

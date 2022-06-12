@@ -1,0 +1,215 @@
+<div id="app">
+  <!-- Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid justify-content-between">
+    <!-- Left elements -->
+    <div class="d-flex">
+      <!-- Brand -->
+      <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+        <img
+          src="https://blog.cellenza.com/wp-content/uploads/2020/05/image4.png"
+          height="30"
+          alt="MDB Logo"
+          loading="lazy"
+          style="margin-top: 2px;"
+        />
+      </a>
+    
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item">
+        <a href="/home" class="nav-link" routerLink="home">Home </a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/admin" class="nav-link" routerLink="admin">Etat boitiers</a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/listServerAccounts" class="nav-link" routerLink="listServerAccounts">Liste des comptes Serveur</a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/listWebAccounts" class="nav-link" routerLink="listWebAccounts">Liste des comptes Web</a>
+      </li>
+      <li class="nav-item" *ngIf="showServerBoard">
+        <a href="/server/webAccounts" class="nav-link" routerLink="server/webAccounts">Liste des comptes Web</a>
+      </li>
+      <li class="nav-item" *ngIf="showServerBoard">
+        <a href="/server/etatBoitiers" class="nav-link" routerLink="server/etatBoitiers">Etat boitiers</a>
+      </li>
+      <li class="nav-item" *ngIf="showServerBoard">
+        <a href="/server/dashboard" class="nav-link" routerLink="server/dashboard">Tableau de bord</a>
+      </li>
+      <li class="nav-item" *ngIf="showWebBoard">
+        <a href="/user/dashboard" class="nav-link" routerLink="user/dashboard">Tableau de bord</a>
+      </li>
+    </ul>
+    
+  </div>
+    <!-- Left elements -->
+
+    <!-- Center elements -->
+    <ul class="navbar-nav flex-row d-none d-md-flex">
+      <li class="nav-item me-3 me-lg-1 active">
+        <a class="nav-link" href="#">
+        </a>
+      </li>
+
+    </ul>
+    <!-- Center elements -->
+
+    <!-- Right elements -->
+    <ul class="navbar-nav flex-row" *ngIf="isLoggedIn">
+      <li class="nav-item me-3 me-lg-1">
+        <a class="nav-link d-sm-flex align-items-sm-center" href="/profile" routerLink="profile">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
+            class="rounded-circle"
+            height="22"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+          <strong class="d-none d-sm-block ms-1">{{ username }}</strong>
+        </a>
+      </li>
+      <li class="nav-item me-3 me-lg-1">
+        <a class="nav-link hidden-arrow" href="#" role="button">
+          <i class='fas fa-comment-dots' style='font-size:24px'></i>
+        </a>
+      </li>
+      <li class="nav-item me-3 me-lg-1">
+        <a href class="nav-link" (click)="logout()">
+          <strong class="d-none d-sm-block ms-1">LogOut</strong>
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav flex-row" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a href="/login" class="nav-link" routerLink="login">Sign In</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- Navbar --> 
+    <router-outlet></router-outlet>
+  
+</div>
+<!-- Footer -->
+<footer class="page-footer font-small mdb-color lighten-3 pt-4">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!--Grid row-->
+    <div class="row">
+
+      <!--Grid column-->
+      <div class="col-lg-2 col-md-12 mb-4">
+
+        <!--Image-->
+        <div class="view overlay z-depth-1-half">
+          <img src="https://www.carnetdebord.info/wp-content/uploads/2022/05/Congres-mondial-IOT-Solutions-2022-a-Barcelone.jpg" class="img-fluid img"
+            alt="">
+          <a href="">
+            <div class="mask rgba-white-light"></div>
+          </a>
+        </div>
+
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-2 col-md-6 mb-4">
+
+        <!--Image-->
+        <div class="view overlay z-depth-1-half">
+          <img src="https://www.objetconnecte.com/wp-content/uploads/2021/03/Solutions-IoT-Monde.jpg" class="img-fluid img"
+            alt="">
+          <a href="">
+            <div class="mask rgba-white-light"></div>
+          </a>
+        </div>
+
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-2 col-md-6 mb-4">
+
+        <!--Image-->
+        <div class="view overlay z-depth-1-half">
+          <img src="https://5.imimg.com/data5/AS/EL/MV/SELLER-655199/iot-solutions-500x500.jpg" class="img-fluid img"
+            alt="">
+          <a href="">
+            <div class="mask rgba-white-light"></div>
+          </a>
+        </div>
+
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-2 col-md-12 mb-4">
+
+        <!--Image-->
+        <div class="view overlay z-depth-1-half">
+          <img src="https://www.mines-stetienne.fr/panoramines/wp-content/uploads/sites/3/2016/11/uneIoT.jpg" class="img-fluid img"
+            alt="">
+          <a href="">
+            <div class="mask rgba-white-light"></div>
+          </a>
+        </div>
+
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-2 col-md-6 mb-4">
+
+        <!--Image-->
+        <div class="view overlay z-depth-1-half">
+          <img src="https://visiquest.com/WordPress/wp-content/uploads/IoT-Internet-Objets.jpg" class="img-fluid img"
+            alt="">
+          <a href="">
+            <div class="mask rgba-white-light"></div>
+          </a>
+        </div>
+
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-2 col-md-6 mb-4">
+
+        <!--Image-->
+        <div class="view overlay z-depth-1-half">
+          <img src="https://images.assetsdelivery.com/compings_v2/jirsak/jirsak1605/jirsak160500040.jpg" class="img-fluid img"
+            alt="">
+          <a href="">
+            <div class="mask rgba-white-light"></div>
+          </a>
+        </div>
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2022 Copyright:
+    <a href="/"> Traci.tn</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+
+
+
+
+

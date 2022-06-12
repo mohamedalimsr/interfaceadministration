@@ -1,0 +1,14 @@
+<div class="container" style="text-align: center;">
+  <h1>Bonjour {{webClientAccount.username}}, voici votre statistiques depuis votre inscription</h1>
+</div>
+<div class="row">
+  <div class="col-6" style="display: block">
+    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+      [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+  </div>
+  <div class="col-6" style="display: block">
+    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
+      [chartType]="doughnutChartType"></canvas>
+  </div>
+</div>

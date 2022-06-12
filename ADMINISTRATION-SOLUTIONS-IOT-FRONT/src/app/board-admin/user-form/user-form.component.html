@@ -1,0 +1,93 @@
+<div class="card my-5">
+  <button type="button" class="btn btn-primary" (click)="addU()" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Ajouter un utilisateur</button>
+</div>
+<div class="card my-5">
+    <h1 style="margin: auto;">Liste des utilisateurs</h1>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rôle</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+            <td>
+              <span *ngFor="let role of user.roles">{{role.name}} / </span>
+            </td>
+            <td>
+              <button type="button" class="btn btn-outline-secondary" (click)="updateU(user.id)" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editer</button>
+            </td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="deleteUser(user.id)">Supprimer</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 *ngIf="isAddMode" class="modal-title" id="exampleModalLabel" style="text-align: center">Ajouter un utilisateur</h4>  
+      <h4 *ngIf="!isAddMode" class="modal-title" id="exampleModalLabel" style="text-align: center">Mise à jour utilisateur</h4>  
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="userform" (ngSubmit)="onSubmit()">
+        <div *ngIf="!isAddMode" class="mb-3">  
+          <label for="name">Id</label>  
+          <input type="text" class="form-control"  formControlName="id" readonly> 
+        </div>        
+        <div class="mb-3">  
+          <label for="name">Nom</label>  
+          <input type="text" class="form-control"  formControlName="username">  
+        </div>  
+        <div class="mb-3">  
+          <label for="name">Email</label>  
+          <input type="text" class="form-control"  formControlName="email">  
+        </div>
+        <div class="mb-3" *ngIf="isAddMode">  
+          <label for="name">Mot de passe</label>  
+          <input type="password" class="form-control"  formControlName="password">  
+        </div>
+        <div class="mb-3">
+          <label for="name">Rôle</label>  
+          <ng-select [items]="roles"
+            bindValue="id"  
+            bindLabel="name"
+            placeholder="Select item"
+            [multiple]="true" formControlName="roles">
+            <ng-template ng-header-tmp>
+
+              <div>
+                <button class="btn btn-link"
+                        (click)="onSelectAll()">Select All</button>
+                <button class="btn btn-link"
+                        (click)="onClearAll()">Clear All</button>
+              </div>
+
+            </ng-template>
+          </ng-select>
+        </div>
+        <hr class="my-4">
+        <div class="mb-3 alert alert-warning" *ngIf="!loading">
+            {{ errorMessage }}
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="changeisUpdate()">Close</button>
+      <button type="button" class="btn btn-success" [hidden]="isupdated" (click)="onSubmit()">Update</button>
+    </div>
+  </div>
+</div>
+</div>
